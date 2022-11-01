@@ -12,6 +12,8 @@ function pastPresentOrFuture(hour) {
     }
 }
 
+localStorage.setItem(blocks, container); //change once save button is made
+
 for (var i = 0; i < blocks.length; i++) {
     var wrapper = document.createElement("div");
     wrapper.setAttribute("class", "row timeBlock");
@@ -21,8 +23,15 @@ for (var i = 0; i < blocks.length; i++) {
     textbox.setAttribute("class", "description col-md-10");
     block.setAttribute("class", "hour");
     block.textContent = moment(blocks[i], 'HH').format('h a');
+
     wrapper.appendChild(block);
     wrapper.appendChild(textbox);
     container.appendChild(wrapper);
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Save";
+    document.body.time-block.append(btn);
+    btn.setAttribute("class", "saveBtn saveBtn-i:hover");
+    
 }
 
