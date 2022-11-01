@@ -12,7 +12,7 @@ function pastPresentOrFuture(hour) {
     }
 }
 
-localStorage.setItem(blocks, container); //change once save button is made
+localStorage.setItem("to-do", date); //change once save button is made
 
 for (var i = 0; i < blocks.length; i++) {
     var wrapper = document.createElement("div");
