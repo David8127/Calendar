@@ -12,7 +12,7 @@ function pastPresentOrFuture(hour) {
     }
 }
 
-localStorage.setItem("to-do", date); //change once save button is made
+localStorage.setItem("input", inputTask.value);
 
 for (var i = 0; i < blocks.length; i++) {
     var wrapper = document.createElement("div");
@@ -35,3 +35,4 @@ for (var i = 0; i < blocks.length; i++) {
     
 }
 
+$('#currentDay').text(moment().format('dddd, MMMM Do'));

@@ -19,6 +19,7 @@ textarea {
   color: black;
   border-radius: 0;
   border-bottom: 10px solid black;
+
 }
 
 .description {
@@ -64,8 +65,7 @@ textarea {
   background-color: #06aed5;
   color: white;
   display: flex;
-  justify-content: space-around;
-  align-items: center;
+  justify-content: flex-start;
 }
 
 .saveBtn i:hover {
