@@ -1,38 +1,47 @@
-var container = document.querySelector(".container");
-var blocks = [9, 10, 11, 12, 13, 14, 15, 16, 17];
-var date = new Date();
+$(document).ready(function () {
+    $('.saveBtn').on('click', function () {
+        var value = $(this).siblings('.description').val();
+        var time = $(this).parent().attr('id');
 
-function pastPresentOrFuture(hour) {
-    if (date.getHours() === hour) {
-        return "present";
-    }   else if (date.getHours() > hour) {
-        return "past"
-    }   else {
-        return "future"
+        localStorage.setItem(time, value);
+
+        $('.notification').addClass('show');
+
+        setTimeout(function () {
+            $('.notification').removeClass('show');
+        }, 5000);
+    });
+
+    function hourUpdater() {
+        var currentHour = moment().hours();
+        $('.time-block').each(function () {
+            var blockHour = parseInt($(this).attr('id').split('-')[1]);
+            if (blockHour < currentHour) {
+                $(this).addClass('past');
+            } else if (blockHour === currentHour) {
+                $(this).removeClass('past');
+                $(this).addClass('present');
+            } else {
+                $(this).removeClass('past');
+                $(this).removeClass('present');
+                $(this).addClass('future');
+            }
+        });
     }
-}
 
-localStorage.setItem("input", inputTask.value);
+    hourUpdater();
 
-for (var i = 0; i < blocks.length; i++) {
-    var wrapper = document.createElement("div");
-    wrapper.setAttribute("class", "row timeBlock");
-    wrapper.classList.add(pastPresentOrFuture(blocks[i]));
-    var block = document.createElement("div");
-    var textbox = document.createElement("textarea");
-    textbox.setAttribute("class", "description col-md-10");
-    block.setAttribute("class", "hour");
-    block.textContent = moment(blocks[i], 'HH').format('h a');
+    var interval = setInterval(hourUpdater, 15000);
 
-    wrapper.appendChild(block);
-    wrapper.appendChild(textbox);
-    container.appendChild(wrapper);
+    $('#hour-9 .description').val(localStorage.getItem('hour-9'));
+    $('#hour-10 .description').val(localStorage.getItem('hour-10'));
+    $('#hour-11 .description').val(localStorage.getItem('hour-11'));
+    $('#hour-12 .description').val(localStorage.getItem('hour-12'));
+    $('#hour-13 .description').val(localStorage.getItem('hour-13'));
+    $('#hour-14 .description').val(localStorage.getItem('hour-14'));
+    $('#hour-15 .description').val(localStorage.getItem('hour-15'));
+    $('#hour-16 .description').val(localStorage.getItem('hour-16'));
+    $('#hour-17 .description').val(localStorage.getItem('hour-17'));
 
-    let btn = document.createElement("button");
-    btn.innerHTML = "Save";
-    document.body.time-block.append(btn);
-    btn.setAttribute("class", "saveBtn saveBtn-i:hover");
-    
-}
-
-$('#currentDay').text(moment().format('dddd, MMMM Do'));
+    $('#currentDay').text(moment().format('dddd, MMMM Do'));
+});
